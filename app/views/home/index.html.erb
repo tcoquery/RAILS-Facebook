@@ -59,3 +59,14 @@
     </div>
   </div>
 </nav>
+
+Notifications
+<br>
+Vous avez <%= @invitations.count %> nouvelle demande d'ami.
+<br>
+<% @invitations.each do |invitation| %>
+  <% @friends = User.where("id = ? ", invitation.user_id) %>
+  <%= @friends.pluck(:first_name).first %> 
+  <%= @friends.pluck(:last_name).first %>
+  <br>
+<%end%>
