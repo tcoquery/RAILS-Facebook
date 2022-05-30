@@ -1,10 +1,12 @@
 <% @user.each do |user|%>
   <% unless user.id == current_user.id %>
-    <%= form_with model: @invitation do |form| %>
       <%= user.first_name %>
       <%= user.last_name %>
-      <%= form.hidden_field :friend_id, value: user.id %>
-      <%= form.submit "Add as friend" %>
+      <% unless current_user.invitations.where("friend_id = ?", user.id).exists? %>
+        <%= form_with model: @invitation do |form| %>
+        <%= form.hidden_field :friend_id, value: user.id %>
+        <%= form.submit "Add as friend" %>
+      <% end %>
     <% end %>
   <% end %>
 <% end %>
