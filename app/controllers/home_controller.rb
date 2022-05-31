@@ -1,7 +1,8 @@
 class HomeController < ApplicationController
   def index
     @user = current_user
-    @invitations = Invitation.where("friend_id = ?", current_user.id)
-        
+    @pending_invitations = current_user.pending_invitations
+    
   end
+
 end
