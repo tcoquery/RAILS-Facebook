@@ -1,0 +1,21 @@
+<% @posts.each do |post| %>
+  <br>
+  <%= post.user.first_name %>
+  <%= post.user.last_name %>
+  <br>
+  <%= post.body %>
+  <%= form_with model: [post, post.comments.build] do |form| %>
+    <%= form.label :body, "Make a new comment:" %>
+    <br>
+    <%= form.text_area :body %>
+    <%= form.hidden_field :user_id, value:current_user.id %>
+    <br>
+    <%= form.submit "Submit" %>
+  <% end %>
+
+  <% post.comments.each do |comment| %>
+    <%= comment.body %>
+    
+  <% end %>
+
+<%end%>

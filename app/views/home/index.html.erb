@@ -46,7 +46,7 @@
 
     <div class="navbar-end">
       <div class="navbar-item">
-        <%= @user.first_name %>
+        <%= current_user.first_name %>
         </div>
         <div class="navbar-item">
           <div class="buttons">
@@ -64,35 +64,14 @@ Notifications
 <br>
 You have <%= @pending_invitations.count %> new friend request.
 <br>
-<% @pending_invitations.each do |pending_invitation| %>
-  <%= form_with model: pending_invitation, method: "delete" do |form| %>
-  <% @friends = User.where("id = ?", pending_invitation.user_id).to_a %>
-    <% @friends.each do |friend| %>
-    <%= friend.first_name %> 
-    <%= friend.last_name %>
-    <%= form.hidden_field :friend_id, value: friend.id %>
-    <%= form.hidden_field :first_name, value: friend.first_name %>
-    <%= form.hidden_field :last_name, value: friend.last_name %>
-    <%= form.submit "Accept" %>
-    <%= form.submit "Refuse" %>
-  <br>
-  <%end%>
-  <%end%>
-<%end%>
+
+<%= render "invitations/requests" %>
 
 Timeline
 
-<%= form_with model: @post, url:posts_path, method: :post do |form| %>
-  <%= form.label :body, "Make a new post:" %>
-  <br>
-  <%= form.text_area :body %>
-  <br>
-  <%= form.submit "Submit" %>
-<% end %>
+<%= render "posts/post_form" %>
 
-<% @posts.each do |post| %>
-  <%= post.user.first_name %>
-  <%= post.user.last_name %>
-  <br>
-  <%= post.body %>
-<% end %>
+<%= render "posts/post_body" %>
+
+
+
