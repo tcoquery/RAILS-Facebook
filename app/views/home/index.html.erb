@@ -79,3 +79,20 @@ You have <%= @pending_invitations.count %> new friend request.
   <%end%>
   <%end%>
 <%end%>
+
+Timeline
+
+<%= form_with model: @post, url:posts_path, method: :post do |form| %>
+  <%= form.label :body, "Make a new post:" %>
+  <br>
+  <%= form.text_area :body %>
+  <br>
+  <%= form.submit "Submit" %>
+<% end %>
+
+<% @posts.each do |post| %>
+  <%= post.user.first_name %>
+  <%= post.user.last_name %>
+  <br>
+  <%= post.body %>
+<% end %>
