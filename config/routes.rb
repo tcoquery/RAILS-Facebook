@@ -2,9 +2,9 @@ Rails.application.routes.draw do
   resources :home, only: [:index]
   resources :users, only: [:index]
   resources :invitations
-  resources :posts do
-    resources :comments
-  end
+  resources :posts 
+  resources :comments
+
 
 
   devise_for :users, controllers: { users: 'users'}
