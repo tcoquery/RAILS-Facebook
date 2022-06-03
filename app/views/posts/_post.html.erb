@@ -3,4 +3,14 @@
   <%= post.user.last_name %>
   <br>
   <%= post.body %>
+  <%= render "comments/comment" %>
+  <%= form_with model: Comment.new do |form| %>
+    <%= form.label :body, "Make a new comment:" %>
+    <br>
+    <%= form.text_area :body %>
+    <%= form.hidden_field :user_id, value:current_user.id %>
+    <%= form.hidden_field :post_id, value:post.id %>
+    <br>
+    <%= form.submit "Submit" %>
+  <% end %>
 </div>
