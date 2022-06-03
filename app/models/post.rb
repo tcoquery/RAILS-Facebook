@@ -8,4 +8,8 @@ class Post < ApplicationRecord
   def liked?(user)
     !!self.likes.find{|like| like.user_id == user.id}
   end
+
+  def like_id(user, post)
+    self.likes.find{|like| like.user_id == user.id || like.post_id == post.id }
+  end
 end

@@ -1,29 +1,13 @@
-<% @posts.each do |post| %>
-  <br>
-  <%= post.user.first_name %>
-  <%= post.user.last_name %>
-  <br>
-  <%= post.body %>
+
   <% if post.liked?(current_user)%>
-    <%= button_to "like", method: :delete, params: {post_id: post.id, user_id: current_user.id} %>
-  <% else %>
-    <%= button_to "like", params: {post_id: post.id, user_id: current_user.id} %>
-  <% end %>
-  <%= post.likes.count %>
-  <%= form_with model: Comment.new do |form| %>
-    <%= form.label :body, "Make a new comment:" %>
-    <br>
-    <%= form.text_area :body %>
+    <%= form_with model: Like.destroy %>
     <%= form.hidden_field :user_id, value:current_user.id %>
     <%= form.hidden_field :post_id, value:post.id %>
-    <br>
-    <%= form.submit "Submit" %>
+    <%= form.submit "Like" %>
+  <% else %>
+    <%= form_with model: Like.new %>
+    <%= form.hidden_field :user_id, value:current_user.id %>
+    <%= form.hidden_field :post_id, value:post.id %>
+    <%= form.submit "Like" %>
   <% end %>
-  <% post.comments.each do |comment| %>
-    <br>
-    <%= comment.user.first_name %>
-    <%= comment.user.last_name %>
-    <br>
-    <%= comment.body %>
-  <% end %>
-<%end%>
+  <%= post.likes.count %>

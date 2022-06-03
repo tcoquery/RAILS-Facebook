@@ -3,7 +3,9 @@ Rails.application.routes.draw do
   resources :invitations
   resources :posts 
   resources :comments
-  post "/home", to: "likes#create"
+  resources :likes
+  post 'likes/new', to: 'likes#create'
+  delete 'likes/:id', to: 'likes#destroy'
 
   devise_for :users, controllers: { users: 'users'}
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html

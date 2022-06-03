@@ -5,7 +5,8 @@ class CommentsController < ApplicationController
 
     respond_to do |format|
       if @comment.save
-        format.turbo_stream
+        flash[:success] = "Great! Your event has been created!"
+        redirect_to posts_path
       else
         format.html { render :new, status: :unprocessable_entity }
       end
