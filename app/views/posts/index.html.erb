@@ -9,9 +9,7 @@ You have <%= @pending_invitations.count %> new friend request.
 
 Timeline
 
-<%= render "posts/post_form" %>
-
-<%= render "posts/post_body" %>
-
-
-
+<%= turbo_frame_tag id="new_post", src:new_post_path %>
+<div id="posts">
+  <%= render @posts %>
+</div>

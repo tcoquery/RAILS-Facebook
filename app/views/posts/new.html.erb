@@ -1,0 +1,9 @@
+<%= turbo_frame_tag id="new_post" do %>
+  <%= form_with model: @post do |form| %>
+    <%= form.label :body, "Make a new post:" %>
+    <br>
+    <%= form.text_area :body %>
+    <br>
+    <%= form.submit "Submit" %>
+  <% end %>
+<% end %>
