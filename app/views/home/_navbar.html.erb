@@ -25,7 +25,10 @@
 
     <div class="navbar-end">
       <div class="navbar-item">
-        <%= link_to current_user.first_name, user_path(current_user.id) %>
+        <%= link_to user_path(current_user.id) do %>
+          <%= image_tag avatar_url_for(current_user, size: 24), class: "rounded-circle mr-1" %>
+          <%= current_user.first_name %>
+        <% end %>
         </div>
         <div class="navbar-item">
           <div class="buttons">
