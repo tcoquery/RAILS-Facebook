@@ -4,5 +4,6 @@ class UsersController < ApplicationController
     @invitation = Invitation.new
   end
 
-
+  def show
+  end
 end

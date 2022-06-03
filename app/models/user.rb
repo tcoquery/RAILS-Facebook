@@ -8,6 +8,7 @@ class User < ApplicationRecord
   has_many :comments
   has_many :invitations
   has_many :friends
+  has_many :likes
   has_many :pending_invitations, class_name: 'Invitation', foreign_key: "friend_id"
 
 
