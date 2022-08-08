@@ -1,27 +1,24 @@
 <div>
-<% @friends.each do |friend|%>
-  <%if post.user_id == friend.friend_id %>
-  <%= post.user.first_name %>
-  <%= post.user.last_name %>
-  <br>
-  <%= post.body %>
-  <%= render "comments/comment" %>
-  <% if post.liked?(current_user)%>
-    <%= button_to "Like", like_path(post.like_id(current_user, post)), method: :delete, params: {user_id: current_user.id, post_id: post.id} %>
-  <% else %>
-    <%= button_to "Like", new_like_path, params: {user_id: current_user.id, post_id: post.id} %>
-  <% end %>
-  <%= post.likes.count %>
-  <%= form_with model: Comment.new do |form| %>
-    <%= form.label :body, "Make a new comment:" %>
-    <br>
-    <%= form.text_area :body %>
-    <%= form.hidden_field :user_id, value:current_user.id %>
-    <%= form.hidden_field :post_id, value:post.id %>
-    <br>
-    <%= form.submit "Submit" %>
-  <% end %>
 
-<%end%>
-  <%end%>
+      <%= post.user.first_name %>
+      <%= post.user.last_name %>
+      <br>
+      <%= post.body %>
+      <%= render "comments/comment" %>
+      <% if post.liked?(current_user)%>
+        <%= button_to "Like", like_path(post.like_id(current_user, post)), method: :delete, params: {user_id: current_user.id, post_id: post.id} %>
+      <% else %>
+        <%= button_to "Like", new_like_path, params: {user_id: current_user.id, post_id: post.id} %>
+      <% end %>
+      <%= post.likes.count %>
+      <%= form_with model: Comment.new do |form| %>
+        <%= form.label :body, "Make a new comment:" %>
+          <br>
+        <%= form.text_area :body %>
+        <%= form.hidden_field :user_id, value:current_user.id %>
+        <%= form.hidden_field :post_id, value:post.id %>
+          <br>
+        <%= form.submit "Submit" %>
+      <% end %>
+
 </div>

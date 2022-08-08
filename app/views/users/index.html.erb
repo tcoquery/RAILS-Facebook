@@ -4,7 +4,8 @@
   <% unless user.id == current_user.id %>
       <%= user.first_name %>
       <%= user.last_name %>
-      <% unless current_user.invitations.where("friend_id = ?", user.id).exists? || current_user.friends.where("user_id = ?", current_user.id).exists? || user.invitations.where("friend_id = ?", current_user.id).exists?%>
+      <br>
+      <% unless current_user.invitations.where("friend_id = ?", user.id).exists? || current_user.friends.where("friend_id = ?", user.id).exists? || user.invitations.where("friend_id = ?", current_user.id).exists?%>
         <%= form_with model: @invitation do |form| %>
         <%= form.hidden_field :friend_id, value: user.id %>
         <%= form.submit "Add as friend" %>

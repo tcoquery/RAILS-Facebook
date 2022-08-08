@@ -1,8 +1,9 @@
 class PostsController < ApplicationController
   def index
     @pending_invitations = current_user.pending_invitations
-    @posts = Post.all
-    @friends = current_user.friends
+    @friends = current_user.friends.pluck(:friend_id)
+    @posts = Post.where(user_id: @friends).or(Post.where(user_id: current_user.id))
+    
   end
 
   def new
