@@ -1,3 +1,9 @@
 <%= render "home/navbar" %>
 
 <%= render "users/user_profile"%>
+
+My posts :
+
+<% @posts.each do |post|%>
+<%= post.body%>
+<%end%>
