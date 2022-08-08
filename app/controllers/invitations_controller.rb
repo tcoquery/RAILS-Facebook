@@ -18,8 +18,8 @@ class InvitationsController < ApplicationController
     @invitation.destroy(params[:id])
 
     if params[:commit] == "Accept"
-      current_user.friends.create(first_name: params[:invitation][:first_name], last_name: params[:invitation][:last_name])
-      @friend.friends.create(user_id: @friend.id, first_name: current_user.first_name, last_name: current_user.last_name)
+      current_user.friends.create(first_name: params[:invitation][:first_name], last_name: params[:invitation][:last_name], friend_id: params[:invitation][:friend_id])
+      @friend.friends.create(user_id: @friend.id, first_name: current_user.first_name, last_name: current_user.last_name, friend_id: current_user.id)
     end
 
     respond_to do |format|

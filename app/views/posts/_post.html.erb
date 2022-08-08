@@ -1,4 +1,6 @@
 <div>
+<% @friends.each do |friend|%>
+  <%if post.user_id == friend.friend_id %>
   <%= post.user.first_name %>
   <%= post.user.last_name %>
   <br>
@@ -19,4 +21,7 @@
     <br>
     <%= form.submit "Submit" %>
   <% end %>
+
+<%end%>
+  <%end%>
 </div>
