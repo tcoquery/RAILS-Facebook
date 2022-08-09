@@ -1,5 +1,9 @@
 class InvitationsController < ApplicationController
 
+  def index
+    @pending_invitations = current_user.pending_invitations
+  end
+
   def create
     @invitation = current_user.invitations.build(user_params)
 

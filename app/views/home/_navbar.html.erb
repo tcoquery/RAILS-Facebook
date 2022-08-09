@@ -15,6 +15,12 @@
       <div class="navbar-item">
         <%=link_to "Users", "/users", class:"has-text-white" %>
       </div>
+      <div class="navbar-item">
+        <%=link_to "Friend Requests", "/invitations", class:"has-text-white" %>
+        <nav class="pagination is-rounded" role="navigation" aria-label="pagination">
+          <div class="pagination-link has-background-danger-dark ml-2"><%= @pending_invitations.count %></div>
+        </nav>
+      </div>
     </div>
 
     <div class="navbar-end">
