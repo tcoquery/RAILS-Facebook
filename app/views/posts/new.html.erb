@@ -1,7 +1,7 @@
 <%= turbo_frame_tag id="new_post" do %>
   <%= form_with model: @post do |form| %>
     <%= form.label :body, "Make a new post:" %>
-    <%= form.text_area :body, class:"textarea is-small" %>
-    <%= form.submit "Submit", class:"button is-link is-small mt-2" %>
+    <%= form.text_area :body, class:"textarea is-small", placeholder: "Share what's on your mind." %>
+    <%= form.submit "Submit", class:"button is-link is-light is-small mt-2" %>
   <% end %>
 <% end %>

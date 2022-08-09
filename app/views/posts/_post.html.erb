@@ -1,44 +1,79 @@
-<div class="card">
-  <header class="card-header">
-    <p class="card-header-title ">
-      <%= image_tag avatar_url_for(post.user, size: 24), class: "image is-32x32 mr-2" %>
-      <%= post.user.first_name %>
-      <%= post.user.last_name %>
-    </p>
-  </header>
-  <div class="card-content">
-    <div class="content">
-      <%= post.body %>
+<div class="box has-background-white-bis">
+  <article class="media">
+    <figure class="media-left">
+      <%= image_tag avatar_url_for(post.user, size: 24), class: "image is-32x32" %>
+    </figure>
+    <div class="media-content ">
+      <div class="content">
+        <p class="mb-2">
+          <strong>
+            <%= post.user.first_name %>
+            <%= post.user.last_name %>
+          </strong>
+          <small>
+            <%= post.created_at%>
+          </small>
+          <br>
+          <%= post.body %>
+        </p>
+        <nav class="level is-mobile">
+          <div class="level-left">
+            <div class="level-item">
+              <% if post.liked?(current_user)%>
+                <%= button_to "Like", like_path(post.like_id(current_user, post)), method: :delete, params: {user_id: current_user.id, post_id: post.id}, class:"button is-link is-small" %>
+              <% else %>
+                <%= button_to "Like", new_like_path, params: {user_id: current_user.id, post_id: post.id}, class:"button is-link is-small" %>
+              <% end %>
+            </div>
+            <div class="level-item">
+              <span class="icon">
+                <i class="fa-solid fa-thumbs-up"></i>
+              </span>
+              <%= post.likes.count %>
+            </div>
+          </div>
+        </nav>
+      </div>
+      <% post.comments.each do |comment| %>
+        <article class="media">
+          <figure class="media-left"></figure>
+          <div class="media-content">
+            <div class="content">
+              <p>
+                <strong>          
+                  <%= comment.user.first_name %>
+                  <%= comment.user.last_name %>
+                </strong>
+                <br>
+                <%= comment.body %>
+              </p>
+            </div>
+          </div>
+        </article>
+      <%end%>
     </div>
-  </div>
-  <footer class="card-footer">
-    <div class="card-footer-item">
-      <%= post.likes.count %>
+  </article>
+  <article class="media">
+    <figure class="media-left">
+      <%= image_tag avatar_url_for(post.user, size: 24), class: "image is-32x32" %>
+    </figure>
+    <div class="media-content">
+    <%= form_with model: Comment.new do |form| %>
+      <div class="field">
+        <p class="control">
+          <%= form.text_area :body, class:"textarea is-small", placeholder:"Add a comment..." %>
+        </p>
+      </div>
+      <%= form.hidden_field :user_id, value:current_user.id %>
+      <%= form.hidden_field :post_id, value:post.id %>
+      <div class="field">
+        <p class="control">
+          <%= form.submit "Post comment", class:"button is-link is-light"%>
+        </p>
+      </div>
+      <% end %>
     </div>
-  </footer>
+  </article>
 </div>
-<% if post.liked?(current_user)%>
-  <%= button_to "Like", like_path(post.like_id(current_user, post)), method: :delete, params: {user_id: current_user.id, post_id: post.id} %>
-<% else %>
-  <%= button_to "Like", new_like_path, params: {user_id: current_user.id, post_id: post.id} %>
-<% end %>
-<br>
-
-<% post.comments.each do |comment| %>
-  <br>
-  <%= comment.user.first_name %>
-  <%= comment.user.last_name %>
-  <br>
-  <%= comment.body %>
-<%end%>
 
 
-<%= form_with model: Comment.new do |form| %>
-  <%= form.label :body, "Make a new comment:" %>
-  <br>
-  <%= form.text_area :body %>
-  <%= form.hidden_field :user_id, value:current_user.id %>
-  <%= form.hidden_field :post_id, value:post.id %>
-  <br>
-  <%= form.submit "Submit" %>
-<% end %>
