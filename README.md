@@ -19,3 +19,5 @@ Here are the different features :
 ![Users page](https://i.imgur.com/YK9X0uB.png)
 ![Friend request page](https://i.imgur.com/tzCgqRV.png)
 ![User profile page](https://i.imgur.com/2sIOupi.png)
+
+Styling was done with Bulma framework.
