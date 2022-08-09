@@ -1,9 +1,5 @@
-<nav class="navbar" role="navigation" aria-label="main navigation">
+<nav class="navbar is-link" role="navigation" aria-label="main navigation">
   <div class="navbar-brand">
-    <a class="navbar-item" href="https://bulma.io">
-      <img src="https://bulma.io/images/bulma-logo.png" width="112" height="28">
-    </a>
-
     <a role="button" class="navbar-burger" aria-label="menu" aria-expanded="false" data-target="navbarBasicExample">
       <span aria-hidden="true"></span>
       <span aria-hidden="true"></span>
@@ -14,29 +10,31 @@
   <div id="navbarBasicExample" class="navbar-menu">
     <div class="navbar-start">
       <div class="navbar-item">
-      <%=link_to "Home", "/" %>
+        <%=link_to "Home", "/", class:"has-text-white" %>
       </div>
-
-
       <div class="navbar-item">
-      <%=link_to "Users", "/users" %>
+        <%=link_to "Users", "/users", class:"has-text-white" %>
       </div>
     </div>
 
     <div class="navbar-end">
-      <div class="navbar-item">
-        <%= link_to user_path(current_user.id) do %>
-          <%= image_tag avatar_url_for(current_user, size: 24), class: "rounded-circle mr-1" %>
-          <%= current_user.first_name %>
-        <% end %>
+      <% if user_signed_in?%>
+        <div class="navbar-item">
+          <%= link_to user_path(current_user.id), class:"is-flex is-align-items-center" do %>
+            <%= image_tag avatar_url_for(current_user, size: 24), class: "image is-24x24 mr-2" %>
+            <span class="has-text-white">
+              <%= current_user.first_name%>
+            </span>
+          <% end %>
         </div>
         <div class="navbar-item">
           <div class="buttons">
             <div class="button is-light">
-              <%= link_to "Sign Out", destroy_user_session_path %> 
+              <%= link_to "Sign Out", destroy_user_session_path, class: "has-text-black" %> 
             </div>
-            </div>
+          </div>
         </div>
+      <% end %>
       </div>
     </div>
   </div>

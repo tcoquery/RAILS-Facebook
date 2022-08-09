@@ -1,30 +1,44 @@
-<div>
-
+<div class="card">
+  <header class="card-header">
+    <p class="card-header-title ">
+      <%= image_tag avatar_url_for(post.user, size: 24), class: "image is-32x32 mr-2" %>
       <%= post.user.first_name %>
       <%= post.user.last_name %>
-      <br>
+    </p>
+  </header>
+  <div class="card-content">
+    <div class="content">
       <%= post.body %>
-      <% post.comments.each do |comment| %>
-        <br>
-        <%= comment.user.first_name %>
-        <%= comment.user.last_name %>
-        <br>
-        <%= comment.body %>
-      <%end%>
-      <% if post.liked?(current_user)%>
-        <%= button_to "Like", like_path(post.like_id(current_user, post)), method: :delete, params: {user_id: current_user.id, post_id: post.id} %>
-      <% else %>
-        <%= button_to "Like", new_like_path, params: {user_id: current_user.id, post_id: post.id} %>
-      <% end %>
+    </div>
+  </div>
+  <footer class="card-footer">
+    <div class="card-footer-item">
       <%= post.likes.count %>
-      <%= form_with model: Comment.new do |form| %>
-        <%= form.label :body, "Make a new comment:" %>
-          <br>
-        <%= form.text_area :body %>
-        <%= form.hidden_field :user_id, value:current_user.id %>
-        <%= form.hidden_field :post_id, value:post.id %>
-          <br>
-        <%= form.submit "Submit" %>
-      <% end %>
-
+    </div>
+  </footer>
 </div>
+<% if post.liked?(current_user)%>
+  <%= button_to "Like", like_path(post.like_id(current_user, post)), method: :delete, params: {user_id: current_user.id, post_id: post.id} %>
+<% else %>
+  <%= button_to "Like", new_like_path, params: {user_id: current_user.id, post_id: post.id} %>
+<% end %>
+<br>
+
+<% post.comments.each do |comment| %>
+  <br>
+  <%= comment.user.first_name %>
+  <%= comment.user.last_name %>
+  <br>
+  <%= comment.body %>
+<%end%>
+
+
+<%= form_with model: Comment.new do |form| %>
+  <%= form.label :body, "Make a new comment:" %>
+  <br>
+  <%= form.text_area :body %>
+  <%= form.hidden_field :user_id, value:current_user.id %>
+  <%= form.hidden_field :post_id, value:post.id %>
+  <br>
+  <%= form.submit "Submit" %>
+<% end %>

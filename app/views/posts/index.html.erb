@@ -1,17 +1,21 @@
 <%= render "home/navbar" %>
 
-Notifications
-<br>
-You have <%= @pending_invitations.count %> new friend request.
-<br>
+<section class="section">
+  <div class="container is-max-desktop">
+    <%= turbo_frame_tag id="new_post", src:new_post_path %>
+  </div>
+  <div class="container is-max-desktop mt-4">
+    <h1 class="title">Timeline</h1>
+    <div id="posts">
+      <%= render @posts %>
+    </div>
+  </div>
+</section>
+
+
 
 <%= render "invitations/requests" %>
-
-Timeline
-
-<%= turbo_frame_tag id="new_post", src:new_post_path %>
-<div id="posts">
-  <%= render @posts %>
-</div>
-
-
+  Notifications
+  <br>
+  You have <%= @pending_invitations.count %> new friend request.
+  <br>

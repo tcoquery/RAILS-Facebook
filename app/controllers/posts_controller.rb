@@ -3,7 +3,6 @@ class PostsController < ApplicationController
     @pending_invitations = current_user.pending_invitations
     @friends = current_user.friends.pluck(:friend_id)
     @posts = Post.where(user_id: @friends).or(Post.where(user_id: current_user.id))
-    
   end
 
   def new
