@@ -1,15 +1,30 @@
 <%= render "home/navbar" %>
 
-<% @user.each do |user|%>
-  <% unless user.id == current_user.id %>
-      <%= user.first_name %>
-      <%= user.last_name %>
-      <br>
-      <% unless current_user.invitations.where("friend_id = ?", user.id).exists? || current_user.friends.where("friend_id = ?", user.id).exists? || user.invitations.where("friend_id = ?", current_user.id).exists?%>
-        <%= form_with model: @invitation do |form| %>
-        <%= form.hidden_field :friend_id, value: user.id %>
-        <%= form.submit "Add as friend" %>
-      <% end %>
+<div class="container is-max-desktop mt-6">
+  <% @user.each do |user|%>
+    <% unless user.id == current_user.id %>
+      <div class="card">
+        <div class="card-content">
+          <div class="media">
+            <div class="media-left">
+              <figure class="image is-32x32">
+                <%= image_tag avatar_url_for(user, size: 24) %>
+              </figure>
+            </div>
+            <div class="media-content">
+              <p class="title is-4">
+                <%= user.first_name %>
+                <%= user.last_name %>
+              </p>
+            </div>
+            <% unless current_user.invitations.where("friend_id = ?", user.id).exists? || current_user.friends.where("friend_id = ?", user.id).exists? || user.invitations.where("friend_id = ?", current_user.id).exists?%>
+              <%= form_with model: @invitation do |form| %>
+                <%= form.hidden_field :friend_id, value: user.id %>
+                <%= form.submit "Add as friend", class:"button is-link" %>
+              <% end %>
+            <% end %>
+          </div>
+      </div>
     <% end %>
   <% end %>
-<% end %>
+</div>

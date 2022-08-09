@@ -1,11 +1,23 @@
 <%= render "home/navbar" %>
 
-<%= render "users/user_profile"%>
+<div class="container is-max-desktop mt-6">
+  <h4 class="title is-4">My profile information:</h4>
+  <%= render "users/user_profile"%>
+  <br>
+  <h4 class="title is-4">My posts</h4>
+  <% @posts.each do |post|%>
+    <div class="box has-background-white-bis">
+      <article class="media">
+        <div class="media-content ">
+          <div class="content">
+            <p class="mb-2">
+              <%= post.body %>
+            </p>
+          </div>
+        </div>
+      </article>
+    </div>
+  <%end%>
+</div>
 
 
-
-My posts :
-
-<% @posts.each do |post|%>
-<%= post.body%>
-<%end%>
