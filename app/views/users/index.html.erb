@@ -7,12 +7,14 @@
     </p>
     <% @user.each do |user|%>
       <% unless user.id == current_user.id %>
-        <a class="panel-block">
+        <a class="panel-block is-flex is-justify-content-space-between">
+        <div class="is-flex is-align-items-center" >
           <figure class="image is-32x32 mr-2">
             <%= image_tag avatar_url_for(user, size: 24) %>
           </figure>
           <%= user.first_name %>
           <%= user.last_name %>
+          </div>
           <% unless current_user.invitations.where("friend_id = ?", user.id).exists? || current_user.friends.where("friend_id = ?", user.id).exists? || user.invitations.where("friend_id = ?", current_user.id).exists?%>
             <%= form_with model: @invitation do |form| %>
               <%= form.hidden_field :friend_id, value: user.id %>

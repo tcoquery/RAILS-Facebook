@@ -18,6 +18,17 @@
       </article>
     </div>
   <%end%>
+  <h4 class="title is-4">My friends:</h4>
+    <nav class="panel">
+      <% @friends.each do |friend|%>
+        <a class="panel-block is-flex is-justify-content-space-between">
+        <div class="is-flex is-align-items-center" >
+          <%= friend.first_name %>
+          <%= friend.last_name %>
+          </div>
+        </a>
+      <% end %>
+    </nav>
 </div>
 
 

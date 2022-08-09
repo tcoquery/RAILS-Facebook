@@ -8,5 +8,6 @@ class UsersController < ApplicationController
   def show
     @posts = current_user.posts
     @pending_invitations = current_user.pending_invitations
+    @friends = current_user.friends
   end
 end
