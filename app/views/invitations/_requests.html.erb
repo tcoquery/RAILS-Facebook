@@ -22,3 +22,7 @@
       <% end %>
     <% end %>
   <% end %>
+  <% if @pending_invitations.count == 0 %>
+    <p class="container is-flex is-justify-content-center">I'm afraid it is mighty empty in here. I'm sure you will make friends soon</p>
+  <%end%>
+</div>

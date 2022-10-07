@@ -1,46 +1,50 @@
 <nav class="navbar is-link" role="navigation" aria-label="main navigation">
-  <div class="navbar-brand">
-    <a role="button" class="navbar-burger" aria-label="menu" aria-expanded="false" data-target="navbarBasicExample">
-      <span aria-hidden="true"></span>
-      <span aria-hidden="true"></span>
-      <span aria-hidden="true"></span>
-    </a>
-  </div>
-
-  <div id="navbarBasicExample" class="navbar-menu">
-    <div class="navbar-start">
-      <div class="navbar-item">
-        <%=link_to "Home", "/", class:"has-text-white" %>
-      </div>
-      <div class="navbar-item">
-        <%=link_to "Add Friends", "/users", class:"has-text-white" %>
-      </div>
-      <div class="navbar-item">
-        <%=link_to "Friend Requests", "/invitations", class:"has-text-white" %>
-        <nav class="pagination is-rounded" role="navigation" aria-label="pagination">
-          <div class="pagination-link has-background-danger-dark ml-2"><%= @pending_invitations.count %></div>
-        </nav>
-      </div>
+  <div class="container">
+    <div class="navbar-brand">
+      <a role="button" class="navbar-burger" aria-label="menu" aria-expanded="false" data-target="navbarBasicExample">
+        <span aria-hidden="true"></span>
+        <span aria-hidden="true"></span>
+        <span aria-hidden="true"></span>
+      </a>
     </div>
 
-    <div class="navbar-end">
-      <% if user_signed_in?%>
+    <div id="navbarBasicExample" class="navbar-menu">
+      <div class="navbar-start">
         <div class="navbar-item">
-          <%= link_to user_path(current_user.id), class:"is-flex is-align-items-center" do %>
-            <%= image_tag avatar_url_for(current_user, size: 24), class: "image is-24x24 mr-2" %>
-            <span class="has-text-white">
-              <%= current_user.first_name%>
-            </span>
-          <% end %>
+          <%=link_to "Home", "/", class:"has-text-white" %>
         </div>
         <div class="navbar-item">
-          <div class="buttons">
-            <div class="button is-light">
-              <%= link_to "Sign Out", destroy_user_session_path, class: "has-text-black" %> 
+          <%=link_to "Add Friends", "/users", class:"has-text-white" %>
+        </div>
+        <div class="navbar-item">
+          <%=link_to "Friend Requests", "/invitations", class:"has-text-white" %>
+          <nav class="pagination is-rounded is-small" role="navigation" aria-label="pagination">
+            <% if @pending_invitations.count > 0%>
+              <div class="pagination-link has-background-danger-dark ml-2"><%= @pending_invitations.count %></div>
+            <%end%>
+          </nav>
+        </div>
+      </div>
+
+      <div class="navbar-end">
+        <% if user_signed_in?%>
+          <div class="navbar-item">
+            <%= link_to user_path(current_user.id), class:"is-flex is-align-items-center" do %>
+              <%= image_tag avatar_url_for(current_user, size: 24), class: "image is-24x24 mr-2" %>
+              <span class="has-text-white">
+                <%= current_user.first_name%>
+              </span>
+            <% end %>
+          </div>
+          <div class="navbar-item">
+            <div class="buttons">
+              <div class="button is-light">
+                <%= link_to "Sign Out", destroy_user_session_path, class: "has-text-black" %> 
+              </div>
             </div>
           </div>
+        <% end %>
         </div>
-      <% end %>
       </div>
     </div>
   </div>
