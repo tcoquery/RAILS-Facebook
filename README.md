@@ -15,6 +15,8 @@ Here are the different features :
 - The user's profile page will show his information, his posts and his friends.
 - A user can use Gravatar to customize its avatar
 
+Available here : https://hidden-reaches-89907.herokuapp.com/
+
 ![Home page](https://i.imgur.com/qYE6NQp.png)
 ![Users page](https://i.imgur.com/ZGRBdFQ.png)
 ![Friend request page](https://i.imgur.com/mk0uzYA.png)
