@@ -15,9 +15,9 @@ Here are the different features :
 - The user's profile page will show his information, his posts and his friends.
 - A user can use Gravatar to customize its avatar
 
-![Home page](https://i.imgur.com/oqJLGYB.png)
-![Users page](https://i.imgur.com/YK9X0uB.png)
-![Friend request page](https://i.imgur.com/tzCgqRV.png)
-![User profile page](https://i.imgur.com/2sIOupi.png)
+![Home page](https://i.imgur.com/qYE6NQp.png)
+![Users page](https://i.imgur.com/ZGRBdFQ.png)
+![Friend request page](https://i.imgur.com/mk0uzYA.png)
+![User profile page](https://i.imgur.com/AO6Yw4g.png)
 
 Styling was done with Bulma framework.
